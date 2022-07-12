@@ -1,5 +1,5 @@
 import json
-
+import os
 
 def parser(path='_vg_85_bgg5jsons/125000/125018_cl.json'):
     """
@@ -21,13 +21,12 @@ def count_bags(path: str):
     return count
 
 
-
 def get_cargo_space(path: str):
     output_data = {}
     space, groups = parser(path)
     a = []
     a = space['size']
-    cargoSpace = {'loading_size': {"height": 0, "length": 0, "width": 0}, 'position': [0,0,0], 'type': "pallet"}
+    cargoSpace = {'loading_size': {"height": 0, "length": 0, "width": 0}, 'position': [0, 0, 0], 'type': "pallet"}
     cargoSpace['loading_size']["height"] = a[0] / 1000
     cargoSpace['loading_size']['length'] = a[1] / 1000
     cargoSpace['loading_size']['width'] = a[2] / 1000
@@ -42,3 +41,8 @@ def get_cargo_space(path: str):
 
     return output_data
 
+
+def get_the_path():
+    for address, dirs, files in os.walk(os.path.abspath('_vg_85_bgg5jsons')):
+        for name in files:
+            yield os.path.join(address, name)
