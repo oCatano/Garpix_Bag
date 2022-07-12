@@ -1,9 +1,22 @@
+import json
 from Parser_and_other_functions import parser
 from Parser_and_other_functions import count_bags
-
-bags_num = count_bags(path='_vg_85_bgg5jsons/125000/125018_cl.json')
-c_space, c_groups = parser(path='_vg_85_bgg5jsons/125000/125018_cl.json')
-
+with open ("_vg_85_bgg5jsons/125000/125018_cl.json", "r") as json_file:
+    data_list = json.load(json_file)
+c_space = dict(data_list['cargo_space']['size'])
+c_grops = data_list['cargo_groups']
+len_c_groups = len(c_grops)
+time_edvard = []
+while len_c_groups != 0:
+    len_c_groups = len_c_groups - 1
+    data_size = dict(c_grops[len_c_groups])
+    data_count = dict(c_grops[len_c_groups])
+    data_size_abc = (data_size["size"])
+    time_edvard.append(data_size_abc)
+c_grops = time_edvard
+print("c_space:", c_space)
+print("c_grops:", c_grops)
+print(data_list)
 max_square = 0
 
 """sort по max_square"""
@@ -15,10 +28,9 @@ def list_print(d_list):
             for k in j:
                 print(k)
 
-def put_block(d_list):
+'''def put_block(d_list): '''
 
 
-data_list = []
 fullness_list = []
 
 max_square = 0
@@ -46,7 +58,7 @@ else:
         max_square = max2
     else: max_square = max3
 a[2][3] = max_square
-data_list.append(a)
+'''data_list.append(a)'''
 
 ''' for i in c_groups:
     if i['size[0]'] * i['size[1]'] > i['size[0]'] * i['size[2]'] and i['size[0]'] * i['size[1]'] > i['size[1]'] * i['size[2]']:
@@ -56,4 +68,4 @@ data_list.append(a)
     elif i['size[1]'] * i['size[2]'] > i['size[0]'] * i['size[1]'] and i['size[1]'] * i['size[2]'] > i['size[0]'] * i['size[2]']:
         max_square = i['size[1]'] * i['size[2]'] '''
 
-list_print(data_list)
+
