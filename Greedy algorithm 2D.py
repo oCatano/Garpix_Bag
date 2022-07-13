@@ -2,10 +2,14 @@ import json
 from Parser_and_other_functions import parser
 from Parser_and_other_functions import count_bags
 class Bag:
-    def __size__(self, path='_vg_85_bgg5jsons/125000/125018_cl.json'):
+    def __size_space__(self):
         with open(path, "r") as json_file:
             data_list = json.load(json_file)
         c_space = dict(data_list['cargo_space']['size'])
+        return c_space
+    def __size_grops__(self):
+        with open(path, "r") as json_file:
+            data_list = json.load(json_file)
         c_grops = data_list['cargo_groups']
         len_c_groups = len(c_grops)
         time_edvard = []
@@ -15,6 +19,11 @@ class Bag:
             data_size_abc = (data_size["size"])
             time_edvard.append(data_size_abc)
         c_grops = time_edvard
+        return c_grops
+path='_vg_85_bgg5jsons/125000/125018_cl.json'
+endi = Bag()
+print(endi.__size_space__())
+
 
 """"
 path="_vg_85_bgg5jsons/125000/125018_cl.json"
