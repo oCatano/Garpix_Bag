@@ -12,7 +12,6 @@ class Bag:
         while len_c_groups != 0:
             len_c_groups = len_c_groups - 1
             data_size = dict(c_grops[len_c_groups])
-            data_count = dict(c_grops[len_c_groups])
             data_size_abc = (data_size["size"])
             time_edvard.append(data_size_abc)
         c_grops = time_edvard
