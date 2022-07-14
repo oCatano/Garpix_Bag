@@ -22,7 +22,7 @@ class Bags:
             len_c_groups = len_c_groups - 1
             data_size = dict(c_grops[len_c_groups])
             data_size_abc = (data_size["size"])
-            c_groups_edvard = (data_size['mass'])
+            c_groups_edvard = (data_size['group_id'])
             data_size_abc['id'] = c_groups_edvard
             time_edvard.append(data_size_abc)
         c_grops = time_edvard
@@ -167,6 +167,7 @@ def count_free_length(arr_b):
 
 
 def count_free_width(arr_b):
+    if(c == 0): return
     i = 0
     while(arr_b[0][i] < 1):
         i+=1
