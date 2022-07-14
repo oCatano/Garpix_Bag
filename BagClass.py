@@ -5,7 +5,7 @@ from random import randrange
 class Bag:
     # дублировать коробки вместо count = 2
     individs = None  # Список индивидов
-
+    new_individs = []
     def __init__(self, path='_vg_85_bgg5jsons/125000/125018_cl.json'):
         self.space, self.boxes = parser(path)
 
@@ -17,36 +17,38 @@ class Bag:
         self.individs[num_of_individ].boxes[index_of_box] = self.boxes[mutatted_index]
 
     def crossover(self, ind1, ind2):
-        len1 = len(self.individs[ind1].boxes)       # Кол-во коробек у первого индивида
-        len2 = len(self.individs[ind2].boxes)       # Кол-во коробок в второго индивида
-        if len1 > len2:     # нахожу точку скрещевения
-            cross_point = randrange(0, len2, 1)
-        else:
-            cross_point = randrange(0, len1, 1)
-        par1 = self.individs[ind1]  # создаю переменную для обмена
-        del self.individs[ind1].boxes[cross_point:len1-1]
+        id_=len(self.new_individs)
+        len_ = len(self.individs[ind1].boxes)       # Кол-во коробек у первого индивида
+        cross_point = randrange(0, len_, 1)
+        self.new_individs[id_].boxes = self.individs[ind1].boxes[0:cross_point]
+        id_ += 1
+        self.new_individs[id_].boxes = self.individs[ind2].boxes[0:cross_point]
+        id_ -= 1
         h = 0
-
         for obj in self.individs[ind2].boxes:
             for obj1 in self.individs[ind1].boxes:
+                if obj1 == self.individs[ind1].boxes[cross_point]:
+                    break
                 if obj == obj1:
                     h = 1
             if h == 0:
-                self.individs[ind1].boxes.append(obj)
+                self.new_individs[id_].boxes.append(obj)
             else:
                 h = 0
-            if len(self.individs[ind1].boxes) == len1:
+            if len(self.new_individs[ind1].boxes) == len_:
                 break
-
-        del self.individs[ind2].boxes[cross_point:len2 - 1]
+        del self.individs[ind2].boxes[cross_point:len_ - 1]
         l = 0
-        for obj in par1.boxes:
+        id_+=1
+        for obj in self.individs[ind1].boxes:
             for obj1 in self.individs[ind2].boxes:
+                if obj1 == self.individs[ind2].boxes[cross_point]:
+                    break
                 if obj == obj1:
                     l = 1
             if l == 0:
-                self.individs[ind2].boxes.append(obj)
+                self.new_individs[id_].boxes.append(obj)
             else:
                 l = 0
-            if len(self.individs[ind2].boxes) == len2:
+            if len(self.new_individs[id_].boxes) == len_:
                 break
