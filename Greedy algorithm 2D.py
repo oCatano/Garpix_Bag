@@ -85,13 +85,15 @@ def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
     sum_of_high = 0
     num_of_boxes_in_the_tower = 0
     while(sum_of_high < cargo_list['height'] - find_the_smallest_high(d_list)):
+        '''нужно условие для того, чтобы коробка стояла основанием именно в цикле(нужно использовать last_l и last_w'''
         sum_of_high += put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, sum_of_high, num_of_boxes_in_the_tower, last_w, last_l)
 
 
 def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, last_w, last_l):
     '''max_square = 0 в последнем листе'''
     high = 0
-    for i in cargo_list(len(d_list), 0, -1):
+    sum = 0
+    for i in reversed(d_list):
         if((i['length'] < x_cor) and (y_cor + i['width'] < cargo_list['width']) and (z_cor + i['height'] < cargo_list['height'])):
             if(num_b == 0):
                 num_b += 1
@@ -103,7 +105,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
                     for j in range(x_cor + i['length'], x_cor, -1):
                         for k in range(y_cor, y_cor + i['width'], 1):
                             arr_b[j][k] = 1
-                    break
+                    return
                 else:
                     if(i['length'] < count_length(arr_b, y_cor) - x_cor):
                         a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
@@ -113,6 +115,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
                         for j in range(x_cor + i['length'], x_cor, -1):
                             for k in range(y_cor, y_cor + i['width'], 1):
                                 arr_b[j][k] = 1
+                        print(2)
                         break
 
             else:
@@ -124,9 +127,11 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
                     f_list.append(a)
                     d_list[i].pop()
                     high = i['height']
-
-                    
-            break
+                    print(3)
+                    break
+        sum += 1
+        print(sum)
+        break
     return high
 
 
