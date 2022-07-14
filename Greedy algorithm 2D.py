@@ -201,4 +201,4 @@ else:
 a[2][3] = max_square
 data_list.append(a)'''
 
-
+fill_cargo(c_groups, c_cargo_space)
