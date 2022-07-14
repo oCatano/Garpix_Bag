@@ -2,6 +2,7 @@ import json
 from BagClass import Bag
 from Parser_and_other_functions import parser
 from Parser_and_other_functions import count_bags
+from IndividClass import Individ
 class Bags:
     def __size_space__(self):
         with open(path, "r") as json_file:
@@ -28,7 +29,6 @@ class Bags:
         c_grops = time_edvard
 
         return c_grops
-
 
 path='_vg_85_bgg5jsons/125000/125018_cl.json'
 endi = Bags()
@@ -201,5 +201,7 @@ else:
     else: max_square = max3
 a[2][3] = max_square
 data_list.append(a)'''
+space, boxes = parser(path='_vg_85_bgg5jsons/125000/125018_cl.json')
+ind = Individ(boxes)
 
 fill_cargo(c_groups, c_cargo_space)
