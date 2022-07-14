@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="feeb0e41-3ad2-498b-8cc5-d140ab7019c1" name="Changes" comment="">
+=======
 <<<<<<< Updated upstream
     <list default="true" id="d782f4d3-588c-4761-8486-fa2b605689b4" name="Changes" comment="class">
+>>>>>>> main
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Greedy algorithm 2D.py" beforeDir="false" afterPath="$PROJECT_DIR$/Greedy algorithm 2D.py" afterDir="false" />
     </list>
@@ -38,6 +42,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Work/Projects/Garpix Project/Code/Rep of project/Garpix_Bag&quot;
+=======
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -52,6 +64,7 @@
 =======
     "last_opened_file_path": "E:/Work/Projects/Garpix Project/Code/Rep of project/Garpix_Bag"
 >>>>>>> Stashed changes
+>>>>>>> main
   }
 }]]></component>
   <component name="RunManager">
@@ -99,7 +112,14 @@
       <workItem from="1657633905484" duration="139000" />
       <workItem from="1657699545816" duration="8061000" />
       <workItem from="1657729753815" duration="6151000" />
+<<<<<<< HEAD
+      <workItem from="1657778530520" duration="16607000" />
+      <workItem from="1657795949420" duration="4394000" />
+      <workItem from="1657801659176" duration="608000" />
+      <workItem from="1657802476917" duration="563000" />
+=======
       <workItem from="1657778530520" duration="17255000" />
+>>>>>>> main
     </task>
     <servers />
   </component>

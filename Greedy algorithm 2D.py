@@ -2,12 +2,8 @@ import json
 from BagClass import Bag
 from Parser_and_other_functions import parser
 from Parser_and_other_functions import count_bags
-<<<<<<< Updated upstream
+from IndividClass import Individ
 class Bags:
-=======
-from IndividClass
-'''class Bag:
->>>>>>> Stashed changes
     def __size_space__(self):
         with open(path, "r") as json_file:
             data_list = json.load(json_file)
@@ -27,13 +23,12 @@ from IndividClass
             len_c_groups = len_c_groups - 1
             data_size = dict(c_grops[len_c_groups])
             data_size_abc = (data_size["size"])
-            c_groups_edvard = (data_size['mass'])
+            c_groups_edvard = (data_size['group_id'])
             data_size_abc['id'] = c_groups_edvard
             time_edvard.append(data_size_abc)
         c_grops = time_edvard
 
         return c_grops
-
 
 path='_vg_85_bgg5jsons/125000/125018_cl.json'
 endi = Bags()
@@ -70,6 +65,7 @@ def list_print(d_list):
                 print(k)
 
 
+'''Добавить Individ вместо d_list, d_list: Individ;   Также подаётся Cargo_space'''
 def fill_cargo(d_list, cargo_list):
     fullness_list = []
     array_of_base = [[0] * cargo_list['width'] for i in range(cargo_list['length'])]
@@ -84,40 +80,52 @@ def fill_row(d_list, cargo_list, f_list, arr_b):
 
 
 def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
+    last_w = cargo_list['width']
+    last_l = cargo_list['length']
     sum_of_high = 0
     num_of_boxes_in_the_tower = 0
-    while(sum_of_high < cargo_list['high'] - find_the_smallest_high(d_list)):
-        sum_of_high += put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, sum_of_high, num_of_boxes_in_the_tower)
+    while(sum_of_high < cargo_list['height'] - find_the_smallest_high(d_list)):
+        sum_of_high += put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, sum_of_high, num_of_boxes_in_the_tower, last_w, last_l)
 
 
-def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b):
+def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, last_w, last_l):
     '''max_square = 0 в последнем листе'''
     high = 0
     for i in cargo_list(len(d_list), 0, -1):
-        if((i['length'] < x_cor) and (y_cor + i['width'] < cargo_list['width']) and (z_cor + i['high'] < cargo_list['high'])):
+        if((i['length'] < x_cor) and (y_cor + i['width'] < cargo_list['width']) and (z_cor + i['height'] < cargo_list['height'])):
             if(num_b == 0):
                 num_b += 1
                 if(y_cor == 0):
-                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['high']], [i['length'], i['width'], i['high'], 0]]
+                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
                     f_list.append(a)
                     d_list[i].pop()
-                    high = i['high']
+                    high = i['height']
                     for j in range(x_cor + i['length'], x_cor, -1):
                         for k in range(y_cor, y_cor + i['width'], 1):
                             arr_b[j][k] = 1
+                    break
                 else:
                     if(i['length'] < count_length(arr_b, y_cor) - x_cor):
-                        a = [[x_cor, y_cor, z_cor], [x_cor + i['length'], y_cor + i['width'], z_cor + i['high']], [i['length'], i['width'], i['high'], 0]]
+                        a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
                         f_list.append(a)
                         d_list[i].pop()
-                        high = i['high']
+                        high = i['height']
                         for j in range(x_cor + i['length'], x_cor, -1):
                             for k in range(y_cor, y_cor + i['width'], 1):
                                 arr_b[j][k] = 1
+                        break
 
             else:
                 num_b+=1
+                if((i['length'] <= last_l) and (i['width'] <= last_w)):
+                    last_l = i['length']
+                    last_w = i['width']
+                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
+                    f_list.append(a)
+                    d_list[i].pop()
+                    high = i['height']
 
+                    
             break
     return high
 
@@ -137,9 +145,9 @@ def find_the_smallest_width(d_list):
 
 
 def find_the_smallest_high(d_list):
-    min_h = d_list[len(d_list) - 1]['high']
+    min_h = d_list[len(d_list) - 1]['height']
     for i in d_list:
-        if(i['high'] < min_h): min_h = i['high']
+        if(i['height'] < min_h): min_h = i['height']
     return min_h
 
 
@@ -152,15 +160,17 @@ def count_length(arr_b, y_cor):
     return (len(arr_b) - i)
 
 def count_free_length(arr_b):
-    i = 0
-    while(arr_b[i][0] < 1):
-        i+=1
-    return i
+    i = len(arr_b[0])
+    n = 0
+    while(arr_b[i][0] < 1 and i >= 0):
+        i-=1
+        n+=1
+    return n
 
 
 def count_free_width(arr_b):
     i = 0
-    while(arr_b[0][i] < 1):
+    while((arr_b[0][i] < 1) and (i < len(arr_b[0]) - 1)):
         i+=1
     return i
 
@@ -192,5 +202,7 @@ else:
     else: max_square = max3
 a[2][3] = max_square
 data_list.append(a)'''
+space, boxes = parser(path='_vg_85_bgg5jsons/125000/125018_cl.json')
+ind = Individ(boxes)
 
-
+print(fill_cargo(c_groups, c_cargo_space))
