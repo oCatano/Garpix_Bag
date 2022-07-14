@@ -96,7 +96,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
             if(num_b == 0):
                 num_b += 1
                 if(y_cor == 0):
-                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['high']], [i['length'], i['width'], i['high'], 0]]
+                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['high']], [i['length'], i['width'], i['high']], [0, i['id']]]
                     f_list.append(a)
                     d_list[i].pop()
                     high = i['high']
@@ -106,7 +106,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
                     break
                 else:
                     if(i['length'] < count_length(arr_b, y_cor) - x_cor):
-                        a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['high']], [i['length'], i['width'], i['high'], 0]]
+                        a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['high']], [i['length'], i['width'], i['high']], [0, i['id']]]
                         f_list.append(a)
                         d_list[i].pop()
                         high = i['high']
@@ -120,7 +120,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
                 if((i['length'] <= last_l) and (i['width'] <= last_w)):
                     last_l = i['length']
                     last_w = i['width']
-                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['high']], [i['length'], i['width'], i['high'], 0]]
+                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['high']], [i['length'], i['width'], i['high']], [0, i['id']]]
                     f_list.append(a)
                     d_list[i].pop()
                     high = i['high']
