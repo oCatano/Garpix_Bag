@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="feeb0e41-3ad2-498b-8cc5-d140ab7019c1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/Gatpix_Bag.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_vg_85_bgg5jsons/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_vg_85_bgg5jsons/.idea/_vg_85_bgg5jsons.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_vg_85_bgg5jsons/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_vg_85_bgg5jsons/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_vg_85_bgg5jsons/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_vg_85_bgg5jsons/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Greedy algorithm 2D.py" beforeDir="false" afterPath="$PROJECT_DIR$/Greedy algorithm 2D.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +36,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Work/Projects/Garpix Project/Code/Пример/Gatpix_Bag&quot;
+    &quot;last_opened_file_path&quot;: &quot;E:/Work/Projects/Garpix Project/Code/Rep of project/Garpix_Bag&quot;
   }
 }</component>
   <component name="RunManager">
@@ -96,6 +85,9 @@
       <workItem from="1657699545816" duration="8061000" />
       <workItem from="1657729753815" duration="6151000" />
       <workItem from="1657778530520" duration="16607000" />
+      <workItem from="1657795949420" duration="4394000" />
+      <workItem from="1657801659176" duration="608000" />
+      <workItem from="1657802476917" duration="563000" />
     </task>
     <servers />
   </component>
