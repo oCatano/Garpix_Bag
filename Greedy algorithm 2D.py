@@ -7,7 +7,8 @@ class Bags:
     def __size_space__(self):
         with open(path, "r") as json_file:
             data_list = json.load(json_file)
-        c_space = dict(data_list['cargo_space']['size'])
+
+        c_space = (dict(data_list['cargo_space']['size']))
         c_space_edvard = (data_list['cargo_space']['id'])
         c_space['id'] = c_space_edvard
         return c_space
@@ -24,12 +25,11 @@ class Bags:
             data_size = dict(c_grops[len_c_groups])
             data_size_abc = (data_size["size"])
             c_groups_edvard = (data_size['group_id'])
-            data_size_abc['id'] = c_groups_edvard
+            data_size_abc['group_id'] = c_groups_edvard
             time_edvard.append(data_size_abc)
         c_grops = time_edvard
 
         return c_grops
-
 path='_vg_85_bgg5jsons/125000/125018_cl.json'
 endi = Bags()
 c_groups = endi.__size_grops__()
