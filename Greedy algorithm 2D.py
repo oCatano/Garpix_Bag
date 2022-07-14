@@ -2,7 +2,12 @@ import json
 from BagClass import Bag
 from Parser_and_other_functions import parser
 from Parser_and_other_functions import count_bags
+<<<<<<< Updated upstream
 class Bags:
+=======
+from IndividClass
+'''class Bag:
+>>>>>>> Stashed changes
     def __size_space__(self):
         with open(path, "r") as json_file:
             data_list = json.load(json_file)
