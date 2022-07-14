@@ -1,7 +1,33 @@
 import json
 from Parser_and_other_functions import parser
 from Parser_and_other_functions import count_bags
-with open ("_vg_85_bgg5jsons/125000/125018_cl.json", "r") as json_file:
+class Bag:
+    def __size_space__(self):
+        with open(path, "r") as json_file:
+            data_list = json.load(json_file)
+        c_space = dict(data_list['cargo_space']['size'])
+        return c_space
+    def __size_grops__(self):
+        with open(path, "r") as json_file:
+            data_list = json.load(json_file)
+        c_grops = data_list['cargo_groups']
+        len_c_groups = len(c_grops)
+        time_edvard = []
+        while len_c_groups != 0:
+            len_c_groups = len_c_groups - 1
+            data_size = dict(c_grops[len_c_groups])
+            data_size_abc = (data_size["size"])
+            time_edvard.append(data_size_abc)
+        c_grops = time_edvard
+        return c_grops
+path='_vg_85_bgg5jsons/125000/125018_cl.json'
+endi = Bag()
+print(endi.__size_space__())
+
+
+""""
+path="_vg_85_bgg5jsons/125000/125018_cl.json"
+with open(path, "r") as json_file:
     data_list = json.load(json_file)
 c_space = dict(data_list['cargo_space']['size'])
 c_grops = data_list['cargo_groups']
@@ -16,7 +42,8 @@ while len_c_groups != 0:
 c_grops = time_edvard
 print("c_space:", c_space)
 print("c_grops:", c_grops)
-print(data_list)
+print(data_list) """
+
 max_square = 0
 
 """sort по max_square"""
