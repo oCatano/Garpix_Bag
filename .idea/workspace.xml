@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="d782f4d3-588c-4761-8486-fa2b605689b4" name="Changes" comment="class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Greedy algorithm 2D.py" beforeDir="false" afterPath="$PROJECT_DIR$/Greedy algorithm 2D.py" afterDir="false" />
     </list>
+=======
+    <list default="true" id="feeb0e41-3ad2-498b-8cc5-d140ab7019c1" name="Changes" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,11 +43,15 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+<<<<<<< Updated upstream
     "last_opened_file_path": "E:/Work/Projects/Garpix Project/Code/Пример/Gatpix_Bag",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)"
+=======
+    "last_opened_file_path": "E:/Work/Projects/Garpix Project/Code/Rep of project/Garpix_Bag"
+>>>>>>> Stashed changes
   }
 }]]></component>
   <component name="RunManager">
@@ -91,7 +99,7 @@
       <workItem from="1657633905484" duration="139000" />
       <workItem from="1657699545816" duration="8061000" />
       <workItem from="1657729753815" duration="6151000" />
-      <workItem from="1657778530520" duration="16607000" />
+      <workItem from="1657778530520" duration="17255000" />
     </task>
     <servers />
   </component>
