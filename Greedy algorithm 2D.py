@@ -91,7 +91,7 @@ def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
 def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, last_w, last_l):
     '''max_square = 0 в последнем листе'''
     high = 0
-    for i in cargo_list(len(d_list), 0, -1):
+    for i in reversed(d_list):
         if((i['length'] < x_cor) and (y_cor + i['width'] < cargo_list['width']) and (z_cor + i['height'] < cargo_list['height'])):
             if(num_b == 0):
                 num_b += 1
