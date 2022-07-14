@@ -161,15 +161,16 @@ def count_length(arr_b, y_cor):
 
 def count_free_length(arr_b):
     i = len(arr_b[0])
+    n = 0
     while(arr_b[i][0] < 1 and i >= 0):
         i-=1
-    return i
+        n+=1
+    return n
 
 
 def count_free_width(arr_b):
-    if(c == 0): return
     i = 0
-    while(arr_b[0][i] < 1 and i < len(arr_b[0])):
+    while((arr_b[0][i] < 1) and (i < len(arr_b[0]) - 1)):
         i+=1
     return i
 
