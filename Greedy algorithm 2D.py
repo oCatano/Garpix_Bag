@@ -160,16 +160,16 @@ def count_length(arr_b, y_cor):
     return (len(arr_b) - i)
 
 def count_free_length(arr_b):
-    i = 0
-    while(arr_b[i][0] < 1):
-        i+=1
+    i = len(arr_b[0])
+    while(arr_b[i][0] < 1 and i >= 0):
+        i-=1
     return i
 
 
 def count_free_width(arr_b):
     if(c == 0): return
     i = 0
-    while(arr_b[0][i] < 1):
+    while(arr_b[0][i] < 1 and i < len(arr_b[0])):
         i+=1
     return i
 
@@ -204,4 +204,4 @@ data_list.append(a)'''
 space, boxes = parser(path='_vg_85_bgg5jsons/125000/125018_cl.json')
 ind = Individ(boxes)
 
-fill_cargo(c_groups, c_cargo_space)
+print(fill_cargo(c_groups, c_cargo_space))
