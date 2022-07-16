@@ -3,3 +3,5 @@ class Individ:
     num = 228
     def __init__(self, boxes):
         self.boxes = boxes
+
+

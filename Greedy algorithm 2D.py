@@ -64,7 +64,7 @@ def list_print(d_list):
 
 
 '''Добавить Individ вместо d_list, d_list: Individ;   Также подаётся Cargo_space'''
-def fill_cargo(d_list, cargo_list):
+def fill_cargo(d_list: Individ, cargo_list: Individ):
     fullness_list = []
     array_of_base = [[0] * cargo_list['width'] for i in range(cargo_list['length'])]
     while(find_the_smallest_length(d_list) < count_free_length(array_of_base)):
@@ -206,6 +206,8 @@ else:
 a[2][3] = max_square
 data_list.append(a)'''
 space, boxes = parser(path='_vg_85_bgg5jsons/125000/125018_cl.json')
-ind = Individ(boxes)
-
-print(fill_cargo(c_groups, c_cargo_space))
+deni = Individ(boxes)
+c_groups = deni.solved_individ
+c_cargo_space = deni.boxes
+print((c_groups, c_cargo_space))
+'''print(fill_cargo(c_gggroups, c_cargggo_space))'''
