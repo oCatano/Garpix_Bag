@@ -206,8 +206,9 @@ else:
 a[2][3] = max_square
 data_list.append(a)'''
 space, boxes = parser(path='_vg_85_bgg5jsons/125000/125018_cl.json')
-deni = Individ(boxes)
-c_groups = deni.solved_individ
-c_cargo_space = deni.boxes
+deni = Individ(space)
+misha = Individ(boxes)
+c_groups = deni.boxes
+c_cargo_space = misha.boxes
 print((c_groups, c_cargo_space))
 '''print(fill_cargo(c_gggroups, c_cargggo_space))'''
