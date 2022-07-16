@@ -1,3 +1,5 @@
+import random
+
 from Parser_and_other_functions import parser
 from random import randrange
 
@@ -39,10 +41,10 @@ class Bag:
                 break
         del self.individs[ind2].boxes[cross_point:len_ - 1]
         l = 0
-        id_+=1
+        id_ += 1
         for obj in self.individs[ind1].boxes:
             for obj1 in self.individs[ind2].boxes:
-                if obj1 == self.individs[ind2].boxes[cross_point]:
+                if self.individs[ind2].boxes.index(obj1) == cross_point:
                     break
                 if obj == obj1:
                     l = 1
@@ -52,3 +54,20 @@ class Bag:
                 l = 0
             if len(self.new_individs[id_].boxes) == len_:
                 break
+
+    def cross(self):
+        k = 0
+        for i in self.individs:
+            for j in range[i+1:len(self.individs) - 1]:
+                if len(self.new_individs) < self.individs.num:
+                    self.crossover(i, j)
+            if len(self.new_individs) >= self.individs.num:
+                k = i
+                break
+        while len(self.new_individs) < self.individs.num:
+            ind1 = randrange(0, self.individs.num)
+            ind2 = randrange(0, self.individs.num)
+            self.crossover(ind1, ind2)
+
+        while len(self.new_individs) > self.individs.num:
+            self.new_individs.pop()

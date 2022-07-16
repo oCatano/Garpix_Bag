@@ -74,7 +74,7 @@ def fill_cargo(d_list, cargo_list):
 
 def fill_row(d_list, cargo_list, f_list, arr_b):
     while(find_the_smallest_width(d_list) < count_free_width(arr_b)):
-        fill_tower(d_list, cargo_list, arr_b, f_list, count_free_length(arr_b) - 1, count_free_width(arr_b) - 1)
+        fill_tower(d_list, cargo_list, arr_b, f_list, count_free_length(arr_b) - 1, len(arr_b[0]) - count_free_width(arr_b))
 
 
 def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
