@@ -34,10 +34,8 @@ path='_vg_85_bgg5jsons/125000/125018_cl.json'
 endi = Bags()
 c_groups = endi.__size_grops__()
 c_cargo_space = endi.__size_space__()
-print(endi.__size_grops__())
-print(endi.__size_space__())
 c_groups.sort(key=lambda x: x['width'] * x['length'])
-print(c_groups)
+
 """"
 path="_vg_85_bgg5jsons/125000/125018_cl.json"
 with open(path, "r") as json_file:
