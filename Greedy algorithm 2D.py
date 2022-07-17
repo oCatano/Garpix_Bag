@@ -3,7 +3,7 @@ from BagClass import Bag
 from Parser_and_other_functions import parser
 from Parser_and_other_functions import count_bags
 from IndividClass import Individ
-class Bags:
+'''class Bags:
     def __size_space__(self):
         with open(path, "r") as json_file:
             data_list = json.load(json_file)
@@ -18,8 +18,8 @@ class Bags:
         c_grops = data_list['cargo_groups']
         len_c_groups = len(c_grops)
         time_edvard = []
-        '''c_grops_edvard = (data_list['mass'])
-        c_grops['id'] = c_grops_edvard'''
+        ''''''c_grops_edvard = (data_list['mass'])
+        c_grops['id'] = c_grops_edvard''''''
         while len_c_groups != 0:
             len_c_groups = len_c_groups - 1
             data_size = dict(c_grops[len_c_groups])
@@ -34,7 +34,7 @@ path='_vg_85_bgg5jsons/125000/125018_cl.json'
 endi = Bags()
 c_groups = endi.__size_grops__()
 c_cargo_space = endi.__size_space__()
-c_groups.sort(key=lambda x: x['width'] * x['length'])
+c_groups.sort(key=lambda x: x['width'] * x['length']) '''
 
 """"
 path="_vg_85_bgg5jsons/125000/125018_cl.json"
@@ -56,6 +56,28 @@ print("c_grops:", c_grops)
 print(data_list) """
 
 
+def size_space(d_list: Individ):
+    c_space = (dict(d_list['size']))
+    c_space_edvard = (d_list['id'])
+    c_space['id'] = c_space_edvard
+    return c_space
+
+
+def size_groups(d_list: Individ):
+    c_grops = d_list
+    len_c_groups = len(c_grops)
+    time_edvard = []
+    while len_c_groups != 0:
+        len_c_groups = len_c_groups - 1
+        data_size = dict(c_grops[len_c_groups])
+        data_size_abc = (data_size["size"])
+        c_groups_edvard = (data_size['group_id'])
+        data_size_abc['group_id'] = c_groups_edvard
+        time_edvard.append(data_size_abc)
+    c_grops = time_edvard
+    gr = sorted(c_grops, key=lambda x: x['width'] * x['length'])
+    return gr
+
 def list_print(d_list):
     for i in d_list:
         for j in i:
@@ -64,7 +86,7 @@ def list_print(d_list):
 
 
 '''Добавить Individ вместо d_list, d_list: Individ;   Также подаётся Cargo_space'''
-def fill_cargo(d_list: Individ, cargo_list: Individ):
+def fill_cargo(d_list, cargo_list):
     fullness_list = []
     array_of_base = [[0] * cargo_list['width'] for i in range(cargo_list['length'])]
     while(find_the_smallest_length(d_list) < count_free_length(array_of_base)):
@@ -208,7 +230,13 @@ data_list.append(a)'''
 space, boxes = parser(path='_vg_85_bgg5jsons/125000/125018_cl.json')
 deni = Individ(space)
 misha = Individ(boxes)
-c_groups = deni.boxes
-c_cargo_space = misha.boxes
-print((c_groups, c_cargo_space))
+cc_groups = misha.boxes
+cc_cargo_space = deni.boxes
+c_cargo_space = size_space(cc_cargo_space)
+c_groups = size_groups(cc_groups)
+print(c_cargo_space)
+print(c_groups)
+'''c_groups = sorted(misha.boxes, key=lambda x: x['width'] * x['length'])'''
 '''print(fill_cargo(c_gggroups, c_cargggo_space))'''
+
+fill_cargo(c_groups, c_cargo_space)
