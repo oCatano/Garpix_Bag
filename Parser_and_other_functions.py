@@ -1,6 +1,8 @@
 import json
 import os
+import shutil
 from IndividClass import Individ
+
 
 def parser(path='_vg_85_bgg5jsons/125000/125018_cl.json'):
     """
@@ -22,10 +24,7 @@ def count_bags(path: str):
     return count
 
 
-def get_cargo_space():
-    space =  {'id': 953309, 'mass': 20, 'size': [1250, 2100, 1800],
-               'params': {'protrusion': [50, 50], 'indentation': [50, 50]}, 'carrying_capacity': 800}
-    a = []
+def get_cargo_space(space):
     a = space['size']
     cargoSpace = {'loading_size': {"height": 0, "length": 0, "width": 0}, 'position': [0, 0, 0], 'type': "pallet"}
     cargoSpace['loading_size']["height"] = a[0] / 1000
@@ -38,26 +37,7 @@ def get_cargo_space():
     return cargoSpace
 
 
-def get_cargos():
-    box = [{'id': '57053Y1', 'mass': 4179, 'size': [240, 149, 190], 'sort': 1, 'count': 1, 'stacking': True,
-            'turnover': False, 'overhang_angle': 50, 'stacking_limit': 0, 'stacking_is_limited': False,
-            'group_id': '717488S2'},
-           {'id': '56081Y1', 'mass': 6522, 'size': [250, 242, 190], 'sort': 2, 'count': 1, 'stacking': True,
-            'turnover': True, 'overhang_angle': 50, 'stacking_limit': 0, 'stacking_is_limited': False,
-            'group_id': '257551Z4'},
-           {'id': '56080Y1', 'mass': 9912, 'size': [380, 206, 300], 'sort': 3, 'count': 1, 'stacking': True,
-            'turnover': True, 'overhang_angle': 50, 'stacking_limit': 0, 'stacking_is_limited': False,
-            'group_id': '853578C4'}]
-
-    solved = [
-        [[0, 0, 0], [240, 149, 190], [240, 149, 190], [45600, '717488S2']],
-        [[240, 149, 0], [490, 391, 190], [250, 242, 190], [60500, '257551Z4']]
-    ]
-    individ = Individ(box)
-    individ.solved_individ = solved
-    #boxes = individ.boxes
-    #full_list = individ.solved_individ
-
+def get_cargos(solved, box):
     cargos = []
     unpacked = []
     id_list = []
@@ -99,19 +79,20 @@ def get_cargos():
     return cargos, unpacked
 
 
-def ger_results():
+def get_results(individ: Individ, cargo_space):
     output_data = {}
-    cargoSpace = get_cargo_space()
-    cargos, unpacked = get_cargos()
+    boxes = individ.boxes
+    solved = individ.solved_individ
+    cargoSpace = get_cargo_space(cargo_space)
+    cargos, unpacked = get_cargos(solved, boxes)
     output_data['cargoSpace'] = cargoSpace
     output_data['cargos'] = cargos
     output_data['unpacked'] = unpacked
-
-    with open('output_data_test.json', 'w') as f:
+    # os.chdir("output_files")
+    # добавить генерацию нового названия файла (как в файле со входными)
+    with open('output_files/test.json', 'w') as f:
         json.dump(output_data, f)
-
     return output_data
-
 
 
 def get_the_path():
