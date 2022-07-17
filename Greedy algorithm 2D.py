@@ -55,6 +55,14 @@ print("c_space:", c_space)
 print("c_grops:", c_grops)
 print(data_list) """
 
+def id_checker(id, f_list):
+    if(f_list): return False
+    for i in f_list:
+        if(i['id'] == id):
+            return True
+        '''True - при условии наличия коробки в f_list'''
+    return False
+
 
 def size_space(d_list: Individ):
     c_space = (dict(d_list['size']))
@@ -114,7 +122,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
     high = 0
     sum = 0
     for i in reversed(d_list):
-        if((i['length'] < x_cor) and (y_cor + i['width'] < cargo_list['width']) and (z_cor + i['height'] < cargo_list['height'])):
+        if(i['length'] < x_cor) and (y_cor + i['width'] < cargo_list['width']) and (z_cor + i['height'] < cargo_list['height']) and not id_checker(i['id'], f_list):
             if(num_b == 0):
                 num_b += 1
                 if(y_cor == 0):
@@ -180,7 +188,7 @@ def count_length(arr_b, y_cor):
     i = 0
     if(y_cor == 0):
         return len(arr_b)
-    while(arr_b[i][y_cor - 1] < 1):
+    while(arr_b[i][y_cor - 1] < 1 and i < len(arr_b) - 1):
         i+=1
     return (len(arr_b) - i)
 
@@ -240,3 +248,6 @@ print(c_groups)
 '''print(fill_cargo(c_gggroups, c_cargggo_space))'''
 
 fill_cargo(c_groups, c_cargo_space)
+
+'''if __name__ == '__main__':'''
+
