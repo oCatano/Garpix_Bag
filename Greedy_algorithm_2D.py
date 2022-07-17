@@ -101,13 +101,13 @@ def fill_cargo(Individ: Individ, space):
     cargo_list = size_space(space)
     fullness_list = []
     array_of_base = [[0] * cargo_list['width'] for i in range(cargo_list['length'])]
-    while(find_the_smallest_length(d_list) < count_free_length(array_of_base)):
+    while(find_the_smallest_length(d_list, fullness_list) < count_free_length(array_of_base)):
         fill_row(d_list, cargo_list, fullness_list, array_of_base)
     return fullness_list
 
 
 def fill_row(d_list, cargo_list, f_list, arr_b):
-    while(find_the_smallest_width(d_list) < count_free_width(arr_b)):
+    while(find_the_smallest_width(d_list, f_list) < count_free_width(arr_b)):
         fill_tower(d_list, cargo_list, arr_b, f_list, count_free_length(arr_b) - 1, len(arr_b[0]) - count_free_width(arr_b) - 1)
 
 
@@ -115,7 +115,7 @@ def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
     last_w = cargo_list['width']
     last_l = cargo_list['length'] - 1
     sum_of_high = 0
-    while(sum_of_high < cargo_list['height'] - find_the_smallest_high(d_list)):
+    while(sum_of_high < cargo_list['height'] - find_the_smallest_high(d_list, f_list)):
         '''нужно условие для того, чтобы коробка стояла основанием именно в цикле(нужно использовать last_l и last_w'''
         sum_of_high += put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, sum_of_high, last_w, last_l)
 
@@ -158,24 +158,24 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
     return high
 
 
-def find_the_smallest_length(d_list):
+def find_the_smallest_length(d_list, f_list):
     min_l = d_list[len(d_list) - 1]['length']
     for i in d_list:
-        if(i['length'] < min_l): min_l = i['length']
+        if(i['length'] < min_l) and not id_checker(i['id'], f_list): min_l = i['length']
     return min_l
 
 
-def find_the_smallest_width(d_list):
+def find_the_smallest_width(d_list, f_list):
     min_w = d_list[len(d_list) - 1]['width']
     for i in d_list:
-        if(i['width'] < min_w): min_w = i['width']
+        if(i['width'] < min_w) and not id_checker(i['id'], f_list): min_w = i['width']
     return min_w
 
 
-def find_the_smallest_high(d_list):
+def find_the_smallest_high(d_list, f_list):
     min_h = d_list[len(d_list) - 1]['height']
     for i in d_list:
-        if(i['height'] < min_h): min_h = i['height']
+        if(i['height'] < min_h) and not id_checker(i['id'], f_list): min_h = i['height']
     return min_h
 
 
