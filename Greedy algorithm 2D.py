@@ -99,7 +99,7 @@ def fill_cargo(Individ: Individ, space):
     d_list = size_groups(Individ.boxes)
     cargo_list = size_space(space)
     fullness_list = []
-    array_of_base = [[0] * cargo_list['width'] for i in range(cargo_list['length'])]
+    array_of_base = [[0] * cargo_list['length'] for i in range(cargo_list['width'])]
     while(find_the_smallest_length(d_list) < count_free_length(array_of_base)):
         fill_row(d_list, cargo_list, fullness_list, array_of_base)
     return fullness_list
@@ -194,7 +194,7 @@ def count_length(arr_b, y_cor):
     return (len(arr_b) - i)
 
 def count_free_length(arr_b):
-    i = len(arr_b[0])
+    i = len(arr_b) - 1
     n = 0
     while(arr_b[i][0] < 1 and i >= 0):
         i-=1
