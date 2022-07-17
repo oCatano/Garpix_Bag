@@ -99,7 +99,7 @@ def fill_cargo(Individ: Individ, space):
     d_list = size_groups(Individ.boxes)
     cargo_list = size_space(space)
     fullness_list = []
-    array_of_base = [[0] * cargo_list['length'] for i in range(cargo_list['width'])]
+    array_of_base = [[0] * cargo_list['width'] for i in range(cargo_list['length'])]
     while(find_the_smallest_length(d_list) < count_free_length(array_of_base)):
         fill_row(d_list, cargo_list, fullness_list, array_of_base)
     return fullness_list
@@ -125,15 +125,15 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
     high = 0
     sum = 0
     for i in d_list:
-        if(i['length'] < x_cor) and (y_cor + i['width'] < cargo_list['width']) and (z_cor + i['height'] < cargo_list['height']):
+        if(i['length'] <= x_cor) and (y_cor + i['width'] <= cargo_list['width']) and (z_cor + i['height'] <= cargo_list['height']):
             '''and not id_checker(i['id'], f_list) - потом добавить'''
             if(num_b == 0):
                 num_b += 1
                 if(y_cor == 0):
-                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['group_id']]]
+                    a = [[cargo_list['length'] - x_cor - 1, y_cor, z_cor], [cargo_list['length'] - x_cor - 1 + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['group_id']]]
                     f_list.append(a)
                     high = i['height']
-                    for j in range(x_cor + i['length'], x_cor, -1):
+                    for j in range(x_cor, x_cor - i['length'], -1):
                         for k in range(y_cor, y_cor + i['width'], 1):
                             arr_b[j][k] = 1
                     break
@@ -145,7 +145,6 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
                         for j in range(x_cor + i['length'], x_cor, -1):
                             for k in range(y_cor, y_cor + i['width'], 1):
                                 arr_b[j][k] = 1
-                        print(2)
                         break
 
             else:
@@ -156,7 +155,6 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
                     a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['group_id']]]
                     f_list.append(a)
                     high = i['height']
-                    print(3)
                     break
         sum += 1
         print(sum)
