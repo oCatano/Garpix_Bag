@@ -56,9 +56,10 @@ print("c_grops:", c_grops)
 print(data_list) """
 
 def id_checker(id, f_list):
-    if(f_list): return False
+    if(f_list == []):
+        return False
     for i in f_list:
-        if(i['id'] == id):
+        if(i[3][1] == id):
             return True
         '''True - при условии наличия коробки в f_list'''
     return False
@@ -79,9 +80,9 @@ def size_groups(d_list: Individ):
         len_c_groups = len_c_groups - 1
         data_size = dict(c_grops[len_c_groups])
         data_size_abc = (data_size["size"])
-        c_groups_edvard = (data_size['group_id'])
+        c_groups_edvard = (data_size['id'])
         '''на backlog - различать массив и словарь по size'''
-        data_size_abc['group_id'] = c_groups_edvard
+        data_size_abc['id'] = c_groups_edvard
         time_edvard.append(data_size_abc)
     c_grops = time_edvard
     gr = sorted(c_grops, key=lambda x: x['width'] * x['length'], reverse=True)
@@ -125,12 +126,11 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
     high = 0
     sum = 0
     for i in d_list:
-        if(i['length'] <= x_cor) and (y_cor + i['width'] <= cargo_list['width']) and (z_cor + i['height'] <= cargo_list['height']):
-            '''and not id_checker(i['id'], f_list) - потом добавить'''
+        if(i['length'] <= x_cor) and (y_cor + i['width'] <= cargo_list['width']) and (z_cor + i['height'] <= cargo_list['height']) and not id_checker(i['id'], f_list):
             if(num_b == 0):
                 num_b += 1
                 if(y_cor == 0):
-                    a = [[cargo_list['length'] - x_cor - 1, y_cor, z_cor], [cargo_list['length'] - x_cor - 1 + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['group_id']]]
+                    a = [[cargo_list['length'] - x_cor - 1, y_cor, z_cor], [cargo_list['length'] - x_cor - 1 + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
                     f_list.append(a)
                     high = i['height']
                     for j in range(x_cor, x_cor - i['length'], -1):
@@ -139,7 +139,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
                     break
                 else:
                     if(i['length'] < count_length(arr_b, y_cor) - x_cor):
-                        a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['group_id']]]
+                        a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
                         f_list.append(a)
                         high = i['height']
                         for j in range(x_cor + i['length'], x_cor, -1):
@@ -152,7 +152,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
                 if((i['length'] <= last_l) and (i['width'] <= last_w)):
                     last_l = i['length']
                     last_w = i['width']
-                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['group_id']]]
+                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
                     f_list.append(a)
                     high = i['height']
                     break
