@@ -95,6 +95,14 @@ def list_print(d_list):
                 print(k)
 
 
+def last_ground_box(f_list):
+    if len(f_list) == 0:
+        yield None
+    else:
+        for i in f_list:
+            if i[0][2] == 0: yield i
+
+
 '''Добавить Individ вместо d_list, d_list: Individ;   Также подаётся Cargo_space'''
 def fill_cargo(Individ: Individ, space):
     d_list = size_groups(Individ.boxes)
@@ -107,8 +115,14 @@ def fill_cargo(Individ: Individ, space):
 
 
 def fill_row(d_list, cargo_list, f_list, arr_b):
+    f_length = len(f_list)
     while(find_the_smallest_width(d_list, f_list) < count_free_width(arr_b)):
-        fill_tower(d_list, cargo_list, arr_b, f_list, count_free_length(arr_b) - 1, len(arr_b[0]) - count_free_width(arr_b) - 1)
+        # fill_tower(d_list, cargo_list, arr_b, f_list, count_free_length(arr_b) - 1, len(arr_b[0]) - count_free_width(arr_b) - 1)
+        iterator = last_ground_box(f_list)
+        if not iterator:
+            fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1, 0)
+        else:
+            fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1, 0)
 
 
 def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
