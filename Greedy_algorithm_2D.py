@@ -123,8 +123,6 @@ def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
 def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, last_l):
     '''max_square = 0 в последнем листе'''
     high = 0
-    if len(f_list) == 10:
-        print()
     for i in d_list:
         if(i['length'] <= x_cor) and (y_cor + i['width'] <= cargo_list['width']) and (z_cor + i['height'] <= cargo_list['height']) and not id_checker(i['id'], f_list):
             if(len(f_list) == 0):
@@ -155,6 +153,8 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                     high = i['height']
                     break
     print(len(f_list))
+    if len(f_list) == 10:
+        print()
     return high
 
 
