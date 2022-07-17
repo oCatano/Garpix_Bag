@@ -80,10 +80,11 @@ def size_groups(d_list: Individ):
         data_size = dict(c_grops[len_c_groups])
         data_size_abc = (data_size["size"])
         c_groups_edvard = (data_size['group_id'])
+        '''на backlog - различать массив и словарь по size'''
         data_size_abc['group_id'] = c_groups_edvard
         time_edvard.append(data_size_abc)
     c_grops = time_edvard
-    gr = sorted(c_grops, key=lambda x: x['width'] * x['length'])
+    gr = sorted(c_grops, key=lambda x: x['width'] * x['length'], reverse=True)
     return gr
 
 def list_print(d_list):
@@ -94,7 +95,9 @@ def list_print(d_list):
 
 
 '''Добавить Individ вместо d_list, d_list: Individ;   Также подаётся Cargo_space'''
-def fill_cargo(d_list, cargo_list):
+def fill_cargo(Individ: Individ, space):
+    d_list = size_groups(Individ.boxes)
+    cargo_list = size_space(space)
     fullness_list = []
     array_of_base = [[0] * cargo_list['width'] for i in range(cargo_list['length'])]
     while(find_the_smallest_length(d_list) < count_free_length(array_of_base)):
@@ -104,12 +107,12 @@ def fill_cargo(d_list, cargo_list):
 
 def fill_row(d_list, cargo_list, f_list, arr_b):
     while(find_the_smallest_width(d_list) < count_free_width(arr_b)):
-        fill_tower(d_list, cargo_list, arr_b, f_list, count_free_length(arr_b) - 1, len(arr_b[0]) - count_free_width(arr_b))
+        fill_tower(d_list, cargo_list, arr_b, f_list, count_free_length(arr_b) - 1, len(arr_b[0]) - count_free_width(arr_b) - 1)
 
 
 def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
     last_w = cargo_list['width']
-    last_l = cargo_list['length']
+    last_l = cargo_list['length'] - 1
     sum_of_high = 0
     num_of_boxes_in_the_tower = 0
     while(sum_of_high < cargo_list['height'] - find_the_smallest_high(d_list)):
@@ -121,24 +124,23 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
     '''max_square = 0 в последнем листе'''
     high = 0
     sum = 0
-    for i in reversed(d_list):
-        if(i['length'] < x_cor) and (y_cor + i['width'] < cargo_list['width']) and (z_cor + i['height'] < cargo_list['height']) and not id_checker(i['id'], f_list):
+    for i in d_list:
+        if(i['length'] < x_cor) and (y_cor + i['width'] < cargo_list['width']) and (z_cor + i['height'] < cargo_list['height']):
+            '''and not id_checker(i['id'], f_list) - потом добавить'''
             if(num_b == 0):
                 num_b += 1
                 if(y_cor == 0):
-                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
+                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['group_id']]]
                     f_list.append(a)
-                    d_list[i].pop()
                     high = i['height']
                     for j in range(x_cor + i['length'], x_cor, -1):
                         for k in range(y_cor, y_cor + i['width'], 1):
                             arr_b[j][k] = 1
-                    return
+                    break
                 else:
                     if(i['length'] < count_length(arr_b, y_cor) - x_cor):
-                        a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
+                        a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['group_id']]]
                         f_list.append(a)
-                        d_list[i].pop()
                         high = i['height']
                         for j in range(x_cor + i['length'], x_cor, -1):
                             for k in range(y_cor, y_cor + i['width'], 1):
@@ -151,9 +153,8 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, num_b, las
                 if((i['length'] <= last_l) and (i['width'] <= last_w)):
                     last_l = i['length']
                     last_w = i['width']
-                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
+                    a = [[cargo_list['length'] - x_cor, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['group_id']]]
                     f_list.append(a)
-                    d_list[i].pop()
                     high = i['height']
                     print(3)
                     break
@@ -236,18 +237,11 @@ else:
 a[2][3] = max_square
 data_list.append(a)'''
 space, boxes = parser(path='_vg_85_bgg5jsons/125000/125018_cl.json')
-deni = Individ(space)
-misha = Individ(boxes)
-cc_groups = misha.boxes
-cc_cargo_space = deni.boxes
-c_cargo_space = size_space(cc_cargo_space)
-c_groups = size_groups(cc_groups)
-print(c_cargo_space)
-print(c_groups)
+tmp_list = Individ(boxes)
 '''c_groups = sorted(misha.boxes, key=lambda x: x['width'] * x['length'])'''
 '''print(fill_cargo(c_gggroups, c_cargggo_space))'''
 
-fill_cargo(c_groups, c_cargo_space)
+fill_cargo(tmp_list, space)
 
 '''if __name__ == '__main__':'''
 
