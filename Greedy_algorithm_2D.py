@@ -121,18 +121,19 @@ def fill_row(d_list, cargo_list, f_list, arr_b):
         if not tmpi:
             fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1, 0)
         else:
-            fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1 - tmpi[0][0], tmpi[1][1] - tmpi[0][1])
+            fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1 - tmpi[0][0], tmpi[1][1])
 
 
 def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
     last_w = cargo_list['width'] - 1
     last_l = cargo_list['length'] - 1
     sum_of_high = 0
-    while(sum_of_high < cargo_list['height'] - find_the_smallest_high(d_list, f_list)):
+    smallest_high, checker = find_the_smallest_high(d_list, f_list, sum_of_high)
+    while(sum_of_high < cargo_list['height'] - smallest_high and checker):
         '''нужно условие для того, чтобы коробка стояла основанием именно в цикле(нужно использовать last_l и last_w'''
         high, last_l, last_w = put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, sum_of_high, last_w, last_l)
         sum_of_high += high
-
+        smallest_high, checker = find_the_smallest_high(d_list, f_list, sum_of_high)
 
 def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, last_l):
     '''max_square = 0 в последнем листе'''
@@ -171,7 +172,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                     high = i['height']
                     break
     print(len(f_list))
-    if len(f_list) == 13:
+    if len(f_list) == 36:
         print()
     return high, last_l, last_w
 
@@ -190,11 +191,25 @@ def find_the_smallest_width(d_list, f_list):
     return min_w
 
 
-def find_the_smallest_high(d_list, f_list):
-    min_h = d_list[len(d_list) - 1]['height']
-    for i in d_list:
-        if(i['height'] < min_h) and not id_checker(i['id'], f_list): min_h = i['height']
-    return min_h
+def find_the_smallest_high(d_list, f_list, sum_of_high):
+    k = max(d_list, key=lambda i: i['height'])
+    checker = False
+    min_h = k['height']
+    if(sum_of_high == 0):
+        for i in d_list:
+            if(i['height'] <= min_h) and not id_checker(i['id'], f_list):
+                min_h = i['height']
+                checker = True
+    else:
+        for i in d_list:
+            if(i['height'] <= min_h) and not id_checker(i['id'], f_list) and (f_list[-1][2][0] <= i['length']) and \
+                    (f_list[-1][2][1] <= i['width']):
+                min_h = i['height']
+                checker = True
+   # mh = min(d_list, key=lambda i: i['height'])
+    if len(f_list) == 36:
+        print()
+    return min_h, checker
 
 
 def count_length(arr_b, y_cor):
@@ -252,6 +267,10 @@ space, boxes = parser(path='_vg_85_bgg5jsons/125000/125018_cl.json')
 tmp_list = Individ(boxes)
 '''c_groups = sorted(misha.boxes, key=lambda x: x['width'] * x['length'])'''
 '''print(fill_cargo(c_gggroups, c_cargggo_space))'''
+k = []
+'''for i in tmp_list.boxes:
+    if i['size']['height'] == 40:
+        k.append(i)'''
 
 fill_cargo(tmp_list, space)
 
