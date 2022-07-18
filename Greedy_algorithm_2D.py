@@ -130,7 +130,8 @@ def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
     sum_of_high = 0
     while(sum_of_high < cargo_list['height'] - find_the_smallest_high(d_list, f_list)):
         '''нужно условие для того, чтобы коробка стояла основанием именно в цикле(нужно использовать last_l и last_w'''
-        sum_of_high += put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, sum_of_high, last_w, last_l)
+        high, last_l, last_w = put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, sum_of_high, last_w, last_l)
+        sum_of_high += high
 
 
 def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, last_l):
@@ -162,7 +163,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                         break
 
             else:
-                if((i['length'] <= last_l) and (i['width'] <= last_w)):
+                if (i['length'] <= last_l) and (i['width'] <= last_w):
                     last_l = i['length']
                     last_w = i['width']
                     a = [[cargo_list['length'] - x_cor - 1, y_cor, z_cor], [cargo_list['length'] - x_cor + i['length'] - 1, y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
@@ -170,9 +171,9 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                     high = i['height']
                     break
     print(len(f_list))
-    if len(f_list) == 130:
+    if len(f_list) == 13:
         print()
-    return high
+    return high, last_l, last_w
 
 
 def find_the_smallest_length(d_list, f_list):

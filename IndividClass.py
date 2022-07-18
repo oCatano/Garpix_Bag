@@ -16,27 +16,28 @@ class Individ:
 
         for i in range(len(self.boxes)):
             self.boxes[i]['real_size'] = self.boxes[i]['size'].copy()
-            new_dict = dict(self.boxes[i])
-
-            tmp = new_dict['size']
-            k = tmp['length']
-            tmp['length'] = tmp['width']
-            tmp['width'] = k
-
+            new_dict = self.boxes[i].copy()
+            changed_dict = {'length': new_dict['size']['width'],
+                            'width': new_dict['size']['length'],
+                            'height': new_dict['size']['height']
+                            }
+            new_dict['size'] = changed_dict
             self.boxes.append(new_dict)
-            new_dict = dict(self.boxes[i])
 
-            tmp = new_dict['size']
-            k = tmp['length']
-            tmp['length'] = tmp['height']
-            tmp['height'] = k
-
+            new_dict = self.boxes[i].copy()
+            changed_dict = {'length': new_dict['size']['height'],
+                            'width': new_dict['size']['width'],
+                            'height': new_dict['size']['length']
+                            }
+            new_dict['size'] = changed_dict
             self.boxes.append(new_dict)
-            new_dict = dict(self.boxes[i])
 
-            tmp = new_dict['size']
-            k = tmp['width']
-            tmp['width'] = tmp['height']
-            tmp['height'] = k
-
+            new_dict = self.boxes[i].copy()
+            changed_dict = {'length': new_dict['size']['length'],
+                            'width': new_dict['size']['height'],
+                            'height': new_dict['size']['width']
+                            }
+            new_dict['size'] = changed_dict
             self.boxes.append(new_dict)
+
+            # {"height": 1.25, "length": 2.1, "width": 1.8}
