@@ -98,9 +98,8 @@ def list_print(d_list):
 def last_ground_box(f_list):
     if len(f_list) == 0:
         yield None
-    else:
-        for i in f_list:
-            if i[0][2] == 0: yield i
+    for i in f_list:
+        if i[0][2] == 0: yield i
 
 
 '''Добавить Individ вместо d_list, d_list: Individ;   Также подаётся Cargo_space'''
@@ -122,11 +121,11 @@ def fill_row(d_list, cargo_list, f_list, arr_b):
         if not tmpi:
             fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1, 0)
         else:
-            fill_tower(d_list, cargo_list, arr_b, f_list, tmpi[0][0], tmpi[1][1] - tmpi[0][1])
+            fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1 - tmpi[0][0], tmpi[1][1] - tmpi[0][1])
 
 
 def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
-    last_w = cargo_list['width']
+    last_w = cargo_list['width'] - 1
     last_l = cargo_list['length'] - 1
     sum_of_high = 0
     while(sum_of_high < cargo_list['height'] - find_the_smallest_high(d_list, f_list)):
@@ -139,7 +138,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
     high = 0
     for i in d_list:
         if(i['length'] <= x_cor) and (y_cor + i['width'] <= cargo_list['width']) and (z_cor + i['height'] <= cargo_list['height']) and not id_checker(i['id'], f_list):
-            if(len(f_list) == 0):
+            if z_cor == 0:
                 if(y_cor == 0):
                     a = [[cargo_list['length'] - x_cor - 1, y_cor, z_cor], [cargo_list['length'] - x_cor - 1 + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
                     f_list.append(a)
@@ -149,11 +148,11 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                             arr_b[j][k] = 1
                     break
                 else:
-                    if(i['length'] < count_length(arr_b, y_cor) - x_cor):
+                    if(i['length'] < x_cor - count_length(arr_b, y_cor)):
                         a = [[cargo_list['length'] - x_cor - 1, y_cor, z_cor], [cargo_list['length'] - x_cor - 1 + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
                         f_list.append(a)
                         high = i['height']
-                        for j in range(x_cor + i['length'], x_cor, -1):
+                        for j in range(x_cor, x_cor - i['length'], -1):
                             for k in range(y_cor, y_cor + i['width'], 1):
                                 arr_b[j][k] = 1
                         break
@@ -167,7 +166,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                     high = i['height']
                     break
     print(len(f_list))
-    if len(f_list) == 10:
+    if len(f_list) == 130:
         print()
     return high
 
