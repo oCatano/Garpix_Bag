@@ -108,9 +108,10 @@ def list_print(d_list):
 
 def last_ground_box(f_list):
     if len(f_list) == 0:
-        yield None
-    for i in f_list:
-        if i[0][2] == 0: yield i
+        return None
+    for j in range(len(f_list) - 1, -1, -1):
+        if f_list[j][0][2] == 0:
+            return f_list[j]
 
 
 '''Добавить Individ вместо d_list, d_list: Individ;   Также подаётся Cargo_space'''
@@ -119,14 +120,19 @@ def fill_cargo(Individ: Individ, space):
     cargo_list = size_space(space)
     fullness_list = []
     array_of_base = [[0] * cargo_list['width'] for i in range(cargo_list['length'])]
-    while(find_the_smallest_length(d_list, fullness_list) < count_free_length(array_of_base, fullness_list)):
+    test_find_smallest = find_the_smallest_length(d_list, fullness_list)
+    test_count_flength = count_free_length(array_of_base, fullness_list)
+    while(test_find_smallest < test_count_flength):
+        if(len(fullness_list) == 72):
+            print()
         fill_row(d_list, cargo_list, fullness_list, array_of_base)
+        test_find_smallest = find_the_smallest_length(d_list, fullness_list)
+        test_count_flength = count_free_length(array_of_base, fullness_list)
     return fullness_list
 
 
 def fill_row(d_list, cargo_list, f_list, arr_b):
     empty = True
-    iterator = last_ground_box(f_list)
     min_w, checker = find_the_smallest_width(d_list, f_list)
     fre = count_free_width(arr_b, f_list, empty)
     new_row = False
@@ -136,9 +142,7 @@ def fill_row(d_list, cargo_list, f_list, arr_b):
     len_f_list = len(f_list)
     while(min_w <= fre and checker):
         # fill_tower(d_list, cargo_list, arr_b, f_list, count_free_length(arr_b) - 1, len(arr_b[0]) - count_free_width(arr_b) - 1)
-
-
-        tmpi = next(iterator)
+        tmpi = last_ground_box(f_list)
         if new_row:
             for j in range(len(f_list) - 1, -1, -1):
                 if f_list[j][0][2] == 0 and f_list[j][0][1] == 0:
@@ -153,7 +157,7 @@ def fill_row(d_list, cargo_list, f_list, arr_b):
             empty = False
         min_w, checker = find_the_smallest_width(d_list, f_list)
         fre = count_free_width(arr_b, f_list, empty)
-        if len(f_list) == 37:
+        if len(f_list) == 73:
             print()
 
 def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
@@ -184,7 +188,8 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                             arr_b[j][k] = 1
                     break
                 else:
-                    if(i['length'] < x_cor - count_length(arr_b, y_cor)):
+                    test = count_length(arr_b, y_cor)
+                    if(i['length'] < last_ground_box(f_list)[2][0]):
                         a = [[cargo_list['length'] - x_cor - 1, y_cor, z_cor], [cargo_list['length'] - x_cor - 1 + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
                         f_list.append(a)
                         high = i['height']
@@ -204,7 +209,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                     high = i['height']
                     break
     print(len(f_list))
-    if len(f_list) == 38:
+    if len(f_list) == 73:
         print()
     return high, last_l, last_w
 
@@ -266,7 +271,7 @@ def count_free_length(arr_b, f_list):
     elif len(f_list) != 0:
         for j in range(len(f_list) - 1, -1, -1):
             if f_list[j][0][2] == 0 and f_list[j][0][1] == 0:
-                return len(arr_b[0]) - f_list[j][1][0]
+                return len(arr_b) - f_list[j][1][0]
 
 
 def count_free_width(arr_b, f_list, empty):
