@@ -41,9 +41,7 @@ def get_cargos(solved, box):
     unpacked = []
     id_list = []
     k = 0
-    print(box)
     for i in solved:
-        print(i)
         a = {"calculated_size": {"height": 0, "length": 0, "width": 0}, "cargo_id": "", "id": 0, "mass": 0,
              "position": {"x": 0, "y": 0, "z": 0}, "size": {"height": 0, "length": 0, "width": 0}, "sort": 1,
              "stacking": True, "turnover": True, "type": "box"}
@@ -51,9 +49,9 @@ def get_cargos(solved, box):
         a["size"]["height"] = i[2][2] / 1000
         a["size"]["length"] = i[2][0] / 1000
         a["size"]["width"] = i[2][1] / 1000
-        a["position"]["x"] = (i[0][1] + i[1][1]) / 2000
+        a["position"]["x"] = (i[0][0] + i[1][0]) / 2000
         a["position"]["y"] = (i[0][2] + i[1][2]) / 2000
-        a["position"]["z"] = (i[0][0] + i[1][0]) / 2000
+        a["position"]["z"] = (i[0][1] + i[1][1]) / 2000
         a["calculated_size"]["height"] = next((x for x in box if x["id"] == i[3][1]), 0)["real_size"]["height"] / 1000
         a["calculated_size"]["length"] = next((x for x in box if x["id"] == i[3][1]), 0)["real_size"]["length"] / 1000
         a["calculated_size"]["width"] = next((x for x in box if x["id"] == i[3][1]), 0)["real_size"]["width"] / 1000
@@ -63,7 +61,6 @@ def get_cargos(solved, box):
         cargos.append(a)
         k += 1
     q = 0
-    print(id_list)
     for j in box:
         if j["id"] not in id_list:
             b = {"group_id": 0, "id": 0, "mass": 0, "position": {"x": -1, "y": 0, "z": -1},
