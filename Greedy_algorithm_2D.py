@@ -93,9 +93,11 @@ def size_groups(d_list: Individ):
     for i in range (len(gr)):
         if gr[i]['width']*gr[i]['length'] != square:
             ind_2 = i
-            final_arr+=sorted(gr[ind_1:ind_2], key=lambda x: x['length'], reverse=True)
+            tmp = gr[ind_1:ind_2]
+            final_arr+=sorted(tmp, key=lambda x: x['length'], reverse=True)
             ind_1 = i
-    return gr
+            square = gr[i]['width'] * gr[i]['length']
+    return final_arr
 
 def list_print(d_list):
     for i in d_list:
@@ -123,18 +125,24 @@ def fill_cargo(Individ: Individ, space):
 
 
 def fill_row(d_list, cargo_list, f_list, arr_b):
+    empty = True
     iterator = last_ground_box(f_list)
     min_w, checker = find_the_smallest_width(d_list, f_list)
-    fre = count_free_width(arr_b, f_list )
-    while(min_w < fre and checker):
+    fre = count_free_width(arr_b, f_list, empty)
+    len_f_list = len(f_list)
+    while(min_w <= fre and checker):
         # fill_tower(d_list, cargo_list, arr_b, f_list, count_free_length(arr_b) - 1, len(arr_b[0]) - count_free_width(arr_b) - 1)
         tmpi = next(iterator)
         if not tmpi:
             fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1, 0)
         else:
             fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1 - tmpi[0][0], tmpi[1][1])
+        if len_f_list != len(f_list):
+            empty = False
         min_w, checker = find_the_smallest_width(d_list, f_list)
-        fre = count_free_width(arr_b, f_list)
+        fre = count_free_width(arr_b, f_list, empty)
+        if len(f_list) == 37:
+            print()
 
 def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
     last_w = cargo_list['width'] - 1
@@ -184,7 +192,7 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                     high = i['height']
                     break
     print(len(f_list))
-    if len(f_list) == 36:
+    if len(f_list) == 37:
         print()
     return high, last_l, last_w
 
@@ -247,10 +255,19 @@ def count_free_length(arr_b):
     return n
 
 
-def count_free_width(arr_b, f_list):
-    i = 0
-    x_r = 0
-    if (f_list == []):
+def count_free_width(arr_b, f_list, empty):
+    if f_list == []:
+        return len(arr_b[0]) - 1
+    elif f_list and not empty:
+        for j in range(len(f_list) - 1, -1, -1):
+            if f_list[j][0][2] == 0:
+                return len(arr_b[0]) - f_list[j][1][1]
+    elif f_list and empty:
+        return len(arr_b[0]) - 1
+
+
+
+    '''if (f_list == []):
         while((arr_b[0][i] < 1) and (i < len(arr_b[0]) - 1)):
             i+=1
         return i
@@ -258,7 +275,7 @@ def count_free_width(arr_b, f_list):
         for j in f_list:
             if j[0][1] == 0 and j[0][2] == 0:
                 x_r = j[1][0]
-        return len(arr_b[0]) - x_r
+        return len(arr_b[0]) - x_r'''
 '''max_square = 0
 size = 0
 sort по max_square
