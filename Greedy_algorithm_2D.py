@@ -1,7 +1,7 @@
 import json
 from BagClass import Bag
 from Parser_and_other_functions import parser
-from Parser_and_other_functions import count_bags
+from Parser_and_other_functions import count_bags, get_results
 from IndividClass import Individ
 '''class Bags:
     def __size_space__(self):
@@ -128,6 +128,7 @@ def fill_cargo(Individ: Individ, space):
         fill_row(d_list, cargo_list, fullness_list, array_of_base)
         test_find_smallest = find_the_smallest_length(d_list, fullness_list)
         test_count_flength = count_free_length(array_of_base, fullness_list)
+    Individ.solved_individ = fullness_list
     return fullness_list
 
 
@@ -332,7 +333,7 @@ k = []
     if i['size']['height'] == 40:
         k.append(i)'''
 
-fill_cargo(tmp_list, space)
-
+f = fill_cargo(tmp_list, space)
+print(tmp_list.solved_individ)
 '''if __name__ == '__main__':'''
-
+get_results(tmp_list, space)
