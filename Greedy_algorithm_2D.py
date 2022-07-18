@@ -86,6 +86,15 @@ def size_groups(d_list: Individ):
         time_edvard.append(data_size_abc)
     c_grops = time_edvard
     gr = sorted(c_grops, key=lambda x: x['width'] * x['length'], reverse=True)
+    final_arr = []
+    ind_1 = 0
+    ind_2 = 0
+    square = gr[0]['width']*gr[0]['length']
+    for i in range (len(gr)):
+        if gr[i]['width']*gr[i]['length'] != square:
+            ind_2 = i
+            final_arr+=sorted(gr[ind_1:ind_2], key=lambda x: x['length'], reverse=True)
+            ind_1 = i
     return gr
 
 def list_print(d_list):
@@ -115,21 +124,24 @@ def fill_cargo(Individ: Individ, space):
 
 def fill_row(d_list, cargo_list, f_list, arr_b):
     iterator = last_ground_box(f_list)
-    while(find_the_smallest_width(d_list, f_list) < count_free_width(arr_b)):
+    min_w, checker = find_the_smallest_width(d_list, f_list)
+    fre = count_free_width(arr_b, f_list )
+    while(min_w < fre and checker):
         # fill_tower(d_list, cargo_list, arr_b, f_list, count_free_length(arr_b) - 1, len(arr_b[0]) - count_free_width(arr_b) - 1)
         tmpi = next(iterator)
         if not tmpi:
             fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1, 0)
         else:
             fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1 - tmpi[0][0], tmpi[1][1])
-
+        min_w, checker = find_the_smallest_width(d_list, f_list)
+        fre = count_free_width(arr_b, f_list)
 
 def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
     last_w = cargo_list['width'] - 1
     last_l = cargo_list['length'] - 1
     sum_of_high = 0
     smallest_high, checker = find_the_smallest_high(d_list, f_list, sum_of_high)
-    while(sum_of_high < cargo_list['height'] - smallest_high and checker):
+    while((sum_of_high < cargo_list['height'] - smallest_high) and checker):
         '''нужно условие для того, чтобы коробка стояла основанием именно в цикле(нужно использовать last_l и last_w'''
         high, last_l, last_w = put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, sum_of_high, last_w, last_l)
         sum_of_high += high
@@ -185,10 +197,14 @@ def find_the_smallest_length(d_list, f_list):
 
 
 def find_the_smallest_width(d_list, f_list):
-    min_w = d_list[len(d_list) - 1]['width']
+    k = max(d_list, key=lambda i: i['width'])
+    checker = False
+    min_w = k['width']
     for i in d_list:
-        if(i['width'] < min_w) and not id_checker(i['id'], f_list): min_w = i['width']
-    return min_w
+        if(i['width'] < min_w) and not id_checker(i['id'], f_list):
+            min_w = i['width']
+            checker =True
+    return min_w, checker
 
 
 def find_the_smallest_high(d_list, f_list, sum_of_high):
@@ -202,8 +218,10 @@ def find_the_smallest_high(d_list, f_list, sum_of_high):
                 checker = True
     else:
         for i in d_list:
-            if(i['height'] <= min_h) and not id_checker(i['id'], f_list) and (f_list[-1][2][0] <= i['length']) and \
-                    (f_list[-1][2][1] <= i['width']):
+            l = f_list[-1][2][0]
+            w = f_list[-1][2][1]
+            if(i['height'] <= min_h) and not id_checker(i['id'], f_list) and ( l >= i['length']) and \
+                    (w >= i['width']):
                 min_h = i['height']
                 checker = True
    # mh = min(d_list, key=lambda i: i['height'])
@@ -229,12 +247,18 @@ def count_free_length(arr_b):
     return n
 
 
-def count_free_width(arr_b):
+def count_free_width(arr_b, f_list):
     i = 0
-    while((arr_b[0][i] < 1) and (i < len(arr_b[0]) - 1)):
-        i+=1
-    return i
-
+    x_r = 0
+    if (f_list == []):
+        while((arr_b[0][i] < 1) and (i < len(arr_b[0]) - 1)):
+            i+=1
+        return i
+    else:
+        for j in f_list:
+            if j[0][1] == 0 and j[0][2] == 0:
+                x_r = j[1][0]
+        return len(arr_b[0]) - x_r
 '''max_square = 0
 size = 0
 sort по max_square
