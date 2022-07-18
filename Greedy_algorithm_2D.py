@@ -99,11 +99,11 @@ def size_groups(d_list: Individ):
             square = gr[i]['width'] * gr[i]['length']
     return final_arr
 
-def list_print(d_list):
+'''def list_print(d_list):
     for i in d_list:
         for j in i:
             for k in j:
-                print(k)
+                print(k)'''
 
 
 def last_ground_box(f_list):
@@ -123,8 +123,6 @@ def fill_cargo(Individ: Individ, space):
     test_find_smallest = find_the_smallest_length(d_list, fullness_list)
     test_count_flength = count_free_length(array_of_base, fullness_list)
     while(test_find_smallest < test_count_flength):
-        if(len(fullness_list) == 72):
-            print()
         fill_row(d_list, cargo_list, fullness_list, array_of_base)
         test_find_smallest = find_the_smallest_length(d_list, fullness_list)
         test_count_flength = count_free_length(array_of_base, fullness_list)
@@ -158,8 +156,6 @@ def fill_row(d_list, cargo_list, f_list, arr_b):
             empty = False
         min_w, checker = find_the_smallest_width(d_list, f_list)
         fre = count_free_width(arr_b, f_list, empty)
-        if len(f_list) == 73:
-            print()
 
 def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
     last_w = cargo_list['width'] - 1
@@ -209,9 +205,6 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                     f_list.append(a)
                     high = i['height']
                     break
-    print(len(f_list))
-    if len(f_list) == 73:
-        print()
     return high, last_l, last_w
 
 
@@ -253,8 +246,6 @@ def find_the_smallest_high(d_list, f_list, sum_of_high):
                 min_h = i['height']
                 checker = True
    # mh = min(d_list, key=lambda i: i['height'])
-    if len(f_list) == 36:
-        print()
     return min_h, checker
 
 
@@ -284,7 +275,6 @@ def count_free_width(arr_b, f_list, empty):
                 return len(arr_b[0]) - f_list[j][1][1]
     elif f_list and empty:
         return len(arr_b[0]) - 1
-
 
 
     '''if (f_list == []):
@@ -324,16 +314,18 @@ else:
     else: max_square = max3
 a[2][3] = max_square
 data_list.append(a)'''
-space, boxes = parser(path='_vg_85_bgg5jsons/125000/125018_cl.json')
-tmp_list = Individ(boxes)
+
 '''c_groups = sorted(misha.boxes, key=lambda x: x['width'] * x['length'])'''
 '''print(fill_cargo(c_gggroups, c_cargggo_space))'''
-k = []
 '''for i in tmp_list.boxes:
     if i['size']['height'] == 40:
         k.append(i)'''
 
-f = fill_cargo(tmp_list, space)
-print(tmp_list.solved_individ)
-'''if __name__ == '__main__':'''
-get_results(tmp_list, space)
+
+
+if __name__ == '__main__':
+    space, boxes = parser(path='_vg_85_bgg5jsons/125000/125018_cl.json')
+    tmp_list = Individ(boxes)
+    f = fill_cargo(tmp_list, space)
+    print(tmp_list.solved_individ)
+    get_results(tmp_list, space)

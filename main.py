@@ -1,3 +1,4 @@
+import Greedy_algorithm_2D
 from Parser_and_other_functions import count_bags
 from Parser_and_other_functions import get_results
 from Parser_and_other_functions import parser
@@ -19,7 +20,7 @@ box = [{'id': '57053Y1', 'mass': 4179, 'size': [240, 149, 190], 'sort': 1, 'coun
         'turnover': True, 'overhang_angle': 50, 'stacking_limit': 0, 'stacking_is_limited': False,
         'group_id': '853578C4'}]
 
-"""
+
 
 solved = [
     [[0, 0, 0], [240, 149, 190], [240, 149, 190], [45600, 1]],
@@ -34,3 +35,11 @@ individ.solved_individ = solved
 
 print(count_bags('_vg_85_bgg5jsons/0/100_cl.json'))
 print(get_results(individ, space))
+"""
+if __name__ == '__main__':
+    print('Введите путь до файла')
+    path = input()
+    space, boxes = parser(path)
+    individ = Individ(boxes)
+    Greedy_algorithm_2D.fill_cargo(individ, space)
+    get_results(individ, space)

@@ -68,7 +68,6 @@ def get_cargos(solved, box):
             b["group_id"] = j["group_id"]
             b["id"] = k
             b["mass"] = j["mass"]
-            print(j)
             b["size"]["height"] = j["size"]["height"] / 1000
             b["size"]["length"] = j["size"]["length"] / 1000
             b["size"]["width"] = j["size"]["width"] / 1000
