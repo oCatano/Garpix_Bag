@@ -143,6 +143,8 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                     a = [[cargo_list['length'] - x_cor - 1, y_cor, z_cor], [cargo_list['length'] - x_cor - 1 + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
                     f_list.append(a)
                     high = i['height']
+                    last_l = i['length']
+                    last_w = i['width']
                     for j in range(x_cor, x_cor - i['length'], -1):
                         for k in range(y_cor, y_cor + i['width'], 1):
                             arr_b[j][k] = 1
@@ -152,6 +154,8 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                         a = [[cargo_list['length'] - x_cor - 1, y_cor, z_cor], [cargo_list['length'] - x_cor - 1 + i['length'], y_cor + i['width'], z_cor + i['height']], [i['length'], i['width'], i['height']], [0, i['id']]]
                         f_list.append(a)
                         high = i['height']
+                        last_l = i['length']
+                        last_w = i['width']
                         for j in range(x_cor, x_cor - i['length'], -1):
                             for k in range(y_cor, y_cor + i['width'], 1):
                                 arr_b[j][k] = 1

@@ -14,3 +14,29 @@ class Individ:
                 self.boxes.append(tmp)
                 i['count'] -= 1
 
+        for i in range(len(self.boxes)):
+            self.boxes[i]['real_size'] = self.boxes[i]['size'].copy()
+            new_dict = dict(self.boxes[i])
+
+            tmp = new_dict['size']
+            k = tmp['length']
+            tmp['length'] = tmp['width']
+            tmp['width'] = k
+
+            self.boxes.append(new_dict)
+            new_dict = dict(self.boxes[i])
+
+            tmp = new_dict['size']
+            k = tmp['length']
+            tmp['length'] = tmp['height']
+            tmp['height'] = k
+
+            self.boxes.append(new_dict)
+            new_dict = dict(self.boxes[i])
+
+            tmp = new_dict['size']
+            k = tmp['width']
+            tmp['width'] = tmp['height']
+            tmp['height'] = k
+
+            self.boxes.append(new_dict)
