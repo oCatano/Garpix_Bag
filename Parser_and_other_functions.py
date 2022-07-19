@@ -107,9 +107,8 @@ def get_the_path(path: str):
         for name in files:
             yield (os.path.join(address, name))
 
-"""
-path = '_vg_85_bgg5jsons/0'
 
+"""
 paths = get_the_path(path)
 for i in paths:
     print(i)

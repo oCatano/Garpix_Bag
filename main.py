@@ -1,7 +1,7 @@
 import Greedy_algorithm_2D
 from Parser_and_other_functions import count_bags
 from Parser_and_other_functions import get_results
-from Parser_and_other_functions import parser
+from Parser_and_other_functions import parser, get_the_path
 from Parser_and_other_functions import Individ
 
 from platform import python_version
@@ -39,7 +39,8 @@ print(get_results(individ, space))
 if __name__ == '__main__':
     print('Введите путь до файла')
     path = input()
-    space, boxes = parser(path)
-    individ = Individ(boxes)
-    Greedy_algorithm_2D.fill_cargo(individ, space)
-    get_results(individ, space)
+    for i in get_the_path(path):
+        space, boxes = parser(i)
+        individ = Individ(boxes)
+        Greedy_algorithm_2D.fill_cargo(individ, space)
+        get_results(individ, space)
