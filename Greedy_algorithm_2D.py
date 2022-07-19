@@ -214,9 +214,6 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
     check = False
     if start_len != len(f_list):
         check = True
-    print(len(f_list))
-    if(len(f_list) == 89):
-        print()
     return high, last_l, last_w, check
 
 
