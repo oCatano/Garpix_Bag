@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="110c57a7-abdd-4431-a8e9-4b0b24ff68bf" name="Changes" comment="output">
+=======
+<<<<<<< Updated upstream
+    <list default="true" id="110c57a7-abdd-4431-a8e9-4b0b24ff68bf" name="Changes" comment="Gebagging part 1102309128391032098409284903">
+      <change afterPath="$PROJECT_DIR$/Movement.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Garpix_Bag.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Garpix_Bag.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Parser_and_other_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Parser_and_other_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+<<<<<<< Updated upstream
+=======
+      <change beforePath="$PROJECT_DIR$/output_files/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/test.json" afterDir="false" />
+=======
+    <list default="true" id="110c57a7-abdd-4431-a8e9-4b0b24ff68bf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,5 +182,14 @@
     <SUITE FILE_PATH="coverage/Garpix_Bag$Greedy_algorithm_2D.coverage" NAME="Greedy_algorithm_2D Coverage Results" MODIFIED="1658223133158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Garpix_Bag$main.coverage" NAME="main Coverage Results" MODIFIED="1658223587605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Garpix_Bag$Parser_and_other_functions.coverage" NAME="Parser_and_other_functions Coverage Results" MODIFIED="1658178721097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+    <SUITE FILE_PATH="coverage/Garpix_Bag$Greedy_algorithm_2D.coverage" NAME="Greedy_algorithm_2D Coverage Results" MODIFIED="1658182881625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Garpix_Bag$main.coverage" NAME="main Coverage Results" MODIFIED="1658183373602" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+=======
+    <SUITE FILE_PATH="coverage/Garpix_Bag$Greedy_algorithm_2D.coverage" NAME="Greedy_algorithm_2D Coverage Results" MODIFIED="1658176363118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   </component>
 </project>

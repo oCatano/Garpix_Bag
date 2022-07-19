@@ -205,6 +205,9 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                     f_list.append(a)
                     high = i['height']
                     break
+    print(len(f_list))
+    if(len(f_list) == 89):
+        print()
     return high, last_l, last_w
 
 
@@ -271,7 +274,7 @@ def count_free_width(arr_b, f_list, empty):
         return len(arr_b[0]) - 1
     elif f_list and not empty:
         for j in range(len(f_list) - 1, -1, -1):
-            if f_list[j][0][2] == 0:
+            if f_list[j][0][2] == 0 and f_list[j][2][0] <= last_ground_box(f_list)[2][0]:
                 return len(arr_b[0]) - f_list[j][1][1]
     elif f_list and empty:
         return len(arr_b[0]) - 1

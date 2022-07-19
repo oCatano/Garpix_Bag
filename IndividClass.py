@@ -1,6 +1,6 @@
 class Individ:
     solved_individ = None
-    num = 228
+    towers = []
 
     def __init__(self, boxes):
         self.boxes = boxes
@@ -41,3 +41,10 @@ class Individ:
             self.boxes.append(new_dict)
 
             # {"height": 1.25, "length": 2.1, "width": 1.8}
+    def towers_list(self):
+        ind_of_ground_box = 0
+        for i in range(1, len(self.solved_individ)):
+            if self.solved_individ[i][0][2] == 0:
+                self.towers.append(self.solved_individ[ind_of_ground_box:i])
+                ind_of_ground_box = i
+        self.towers.append(self.solved_individ[ind_of_ground_box:len(self.solved_individ)])
