@@ -1,6 +1,9 @@
 import json
 import os
 from IndividClass import Individ
+from pathlib import Path
+from random import choice
+from string import ascii_letters
 
 
 def parser(path='_vg_85_bgg5jsons/125000/125018_cl.json'):
@@ -88,14 +91,27 @@ def get_results(individ: Individ, cargo_space):
     output_data['cargoSpace'] = cargoSpace
     output_data['cargos'] = cargos
     output_data['unpacked'] = unpacked
-    # os.chdir("output_files")
-    # добавить генерацию нового названия файла (как в файле со входными)
-    with open('output_files/test.json', 'w') as f:
+
+    home = str(Path.home()) + '\output'
+    if not os.path.exists(home):
+        os.mkdir(home)
+    name = ''.join(choice(ascii_letters) for i in range(6)) + '.json'
+    path = home + '\\' + name
+    with open(path, 'w') as f:
         json.dump(output_data, f)
     return output_data
 
 
-def get_the_path():
-    for address, dirs, files in os.walk(os.path.abspath('_vg_85_bgg5jsons')):
+def get_the_path(path: str):
+    for address, dirs, files in os.walk(os.path.abspath(path)):
         for name in files:
-            yield os.path.join(address, name)
+            yield (os.path.join(address, name))
+
+"""
+path = '_vg_85_bgg5jsons/0'
+
+paths = get_the_path(path)
+for i in paths:
+    print(i)
+"""
+
