@@ -37,20 +37,23 @@ individ.solved_individ = solved
 print(count_bags('_vg_85_bgg5jsons/0/100_cl.json'))
 print(get_results(individ, space))
 """
-if __name__ == '__main__':
-    print('Введите путь до файла')
-    path = input()
-    '''for i in get_the_path(path):
-        space, boxes = parser(i)
-        individ = Individ(boxes)
-        Greedy_algorithm_2D.fill_cargo(individ, space)
-        get_results(individ, space)'''
 
-    space, boxes = parser(path)
+''' space, boxes = parser(path)
     individ = Individ(boxes)
     Greedy_algorithm_2D.fill_cargo(individ, space)
     individ.towers_list()
     rectangles = get_ground_rectangles(individ.towers)
     bin = [(space['size']['length'], space['size']['width'])]
     packer = packerr(rectangles, bin)
-    get_results(individ, space)
+    get_results(individ, space)'''
+
+if __name__ == '__main__':
+    print('Введите путь до файла')
+    path = input()
+    for i in get_the_path(path):
+        space, boxes = parser(i)
+        individ = Individ(boxes)
+        Greedy_algorithm_2D.fill_cargo(individ, space)
+        get_results(individ, space)
+
+

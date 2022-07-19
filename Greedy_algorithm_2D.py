@@ -139,7 +139,8 @@ def fill_row(d_list, cargo_list, f_list, arr_b):
         new_row = True
 
     len_f_list = len(f_list)
-    while(min_w <= fre and checker):
+    check_of_f_list_change = True
+    while(min_w <= fre and checker and check_of_f_list_change):
         # fill_tower(d_list, cargo_list, arr_b, f_list, count_free_length(arr_b) - 1, len(arr_b[0]) - count_free_width(arr_b) - 1)
         tmpi = last_ground_box(f_list)
         if new_row:
@@ -151,7 +152,7 @@ def fill_row(d_list, cargo_list, f_list, arr_b):
         elif not tmpi:
             fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1, 0)
         else:
-            fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1 - tmpi[0][0], tmpi[1][1])
+            check_of_f_list_change = fill_tower(d_list, cargo_list, arr_b, f_list, len(arr_b) - 1 - tmpi[0][0], tmpi[1][1])
         if len_f_list != len(f_list):
             empty = False
         min_w, checker = find_the_smallest_width(d_list, f_list)
@@ -162,15 +163,19 @@ def fill_tower(d_list, cargo_list, arr_b, f_list, x_cor, y_cor):
     last_l = cargo_list['length'] - 1
     sum_of_high = 0
     smallest_high, checker = find_the_smallest_high(d_list, f_list, sum_of_high)
-    while((sum_of_high < cargo_list['height'] - smallest_high) and checker):
+    check_of_f_list_change = True
+    while((sum_of_high < cargo_list['height'] - smallest_high) and checker and check_of_f_list_change):
         '''нужно условие для того, чтобы коробка стояла основанием именно в цикле(нужно использовать last_l и last_w'''
-        high, last_l, last_w = put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, sum_of_high, last_w, last_l)
+        high, last_l, last_w, check_of_f_list_change = put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, sum_of_high, last_w, last_l)
         sum_of_high += high
         smallest_high, checker = find_the_smallest_high(d_list, f_list, sum_of_high)
+    return check_of_f_list_change
+
 
 def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, last_l):
     '''max_square = 0 в последнем листе'''
     high = 0
+    start_len = len(f_list)
     for i in d_list:
         if(i['length'] <= x_cor) and (y_cor + i['width'] <= cargo_list['width']) and (z_cor + i['height'] <= cargo_list['height']) and not id_checker(i['id'], f_list):
             if z_cor == 0:
@@ -205,10 +210,14 @@ def put_block(d_list, cargo_list, f_list, arr_b, x_cor, y_cor, z_cor, last_w, la
                     f_list.append(a)
                     high = i['height']
                     break
+
+    check = False
+    if start_len != len(f_list):
+        check = True
     print(len(f_list))
     if(len(f_list) == 89):
         print()
-    return high, last_l, last_w
+    return high, last_l, last_w, check
 
 
 def find_the_smallest_length(d_list, f_list):
@@ -237,14 +246,14 @@ def find_the_smallest_high(d_list, f_list, sum_of_high):
     min_h = k['height']
     if(sum_of_high == 0):
         for i in d_list:
-            if(i['height'] <= min_h) and not id_checker(i['id'], f_list):
+            if(i['height'] < min_h) and not id_checker(i['id'], f_list):
                 min_h = i['height']
                 checker = True
     else:
         for i in d_list:
             l = f_list[-1][2][0]
             w = f_list[-1][2][1]
-            if(i['height'] <= min_h) and not id_checker(i['id'], f_list) and ( l >= i['length']) and \
+            if(i['height'] < min_h) and not id_checker(i['id'], f_list) and ( l >= i['length']) and \
                     (w >= i['width']):
                 min_h = i['height']
                 checker = True

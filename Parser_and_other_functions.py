@@ -92,11 +92,11 @@ def get_results(individ: Individ, cargo_space):
     output_data['cargos'] = cargos
     output_data['unpacked'] = unpacked
 
-    home = str(Path.home()) + '\output'
+    home = str(Path.home()) + '/output'
     if not os.path.exists(home):
         os.mkdir(home)
     name = ''.join(choice(ascii_letters) for i in range(6)) + '.json'
-    path = home + '\\' + name
+    path = home + '//' + name
     with open(path, 'w') as f:
         json.dump(output_data, f)
     return output_data
